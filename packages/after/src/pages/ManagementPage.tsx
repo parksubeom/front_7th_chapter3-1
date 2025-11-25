@@ -6,9 +6,9 @@ import {
   Alert,
   Modal,
 } from "../components/ui";
-import { DataTable } from "../components/ui/DataTable"
-import { ActionButton as Button } from '@/components/domain/ActionButton';
-import type {  Column } from "@/components/ui/DataTable"
+import { DataTable } from "../components/ui/DataTable";
+import { ActionButton as Button } from "@/components/domain/ActionButton";
+import type { Column } from "@/components/ui/DataTable";
 import { StatusBadge } from "@/components/domain/StatusBadge";
 import { userService } from "../services/userService";
 import { postService } from "../services/postService";
@@ -191,59 +191,59 @@ export const ManagementPage: React.FC = () => {
     const renderActions = (row: Entity) => (
       <div className="flex gap-2 flex-wrap">
         {/* 1. 수정 버튼 (Edit) */}
-        <Button 
-          action="edit" 
-          size="sm" 
+        <Button
+          action="edit"
+          size="sm"
           entityType={entityType} // ✅ 추가됨
-          entity={row}            // ✅ 추가됨
-          onClick={() => handleEdit(row)} 
+          entity={row} // ✅ 추가됨
+          onClick={() => handleEdit(row)}
         />
-        
+
         {entityType === "post" && (
           <>
             {/* 2. 게시 버튼 (Publish -> Success Color) */}
-            {(row as Post).status === 'draft' && (
-               <Button 
-                 action="publish" 
-                 size="sm" 
-                 entityType={entityType}
-                 entity={row}            
-                 onClick={() => handleStatusAction(row.id, "publish")} 
-               />
+            {(row as Post).status === "draft" && (
+              <Button
+                action="publish"
+                size="sm"
+                entityType={entityType}
+                entity={row}
+                onClick={() => handleStatusAction(row.id, "publish")}
+              />
             )}
 
             {/* 3. 보관 버튼 (Archive -> Secondary Color) */}
-            {(row as Post).status === 'published' && (
-               <Button 
-                 action="archive" 
-                 size="sm" 
-                 entityType={entityType} // ✅ 추가됨 (이게 있어야 secondary로 변함)
-                 entity={row}            // ✅ 추가됨
-                 onClick={() => handleStatusAction(row.id, "archive")} 
-               />
+            {(row as Post).status === "published" && (
+              <Button
+                action="archive"
+                size="sm"
+                entityType={entityType} // ✅ 추가됨 (이게 있어야 secondary로 변함)
+                entity={row} // ✅ 추가됨
+                onClick={() => handleStatusAction(row.id, "archive")}
+              />
             )}
 
             {/* 4. 복원 버튼 (Restore -> Outline Style) */}
-            {(row as Post).status === 'archived' && (
-               <Button 
-                 action="restore" 
-                 size="sm" 
-                 entityType={entityType} // ✅ 추가됨 (이게 있어야 outline으로 변함)
-                 entity={row}            // ✅ 추가됨
-                 onClick={() => handleStatusAction(row.id, "restore")} 
-               />
+            {(row as Post).status === "archived" && (
+              <Button
+                action="restore"
+                size="sm"
+                entityType={entityType} // ✅ 추가됨 (이게 있어야 outline으로 변함)
+                entity={row} // ✅ 추가됨
+                onClick={() => handleStatusAction(row.id, "restore")}
+              />
             )}
           </>
         )}
-        
+
         {/* 5. 삭제 버튼 (Delete -> Danger Color) */}
         {/* 이건 기존에도 잘 되고 있었습니다 */}
-        <Button 
-          action="delete" 
-          size="sm" 
+        <Button
+          action="delete"
+          size="sm"
           entityType={entityType}
           entity={row}
-          onClick={() => handleDelete(row.id)} 
+          onClick={() => handleDelete(row.id)}
         />
       </div>
     );
@@ -253,25 +253,29 @@ export const ManagementPage: React.FC = () => {
         { key: "id", header: "ID", width: "60px" },
         { key: "username", header: "사용자명", width: "150px" },
         { key: "email", header: "이메일" },
-        { 
-          key: "role", 
-          header: "역할", 
+        {
+          key: "role",
+          header: "역할",
           width: "120px",
-          render: (row: Entity) => <StatusBadge userRole={(row as User).role} /> 
+          render: (row: Entity) => (
+            <StatusBadge userRole={(row as User).role} />
+          ),
         },
-        { 
-          key: "status", 
-          header: "상태", 
-          width: "120px", 
-          render: (row: Entity) => <StatusBadge status={(row as User).status} pill />
+        {
+          key: "status",
+          header: "상태",
+          width: "120px",
+          render: (row: Entity) => (
+            <StatusBadge status={(row as User).status} pill />
+          ),
         },
         { key: "createdAt", header: "생성일", width: "120px" },
         { key: "lastLogin", header: "마지막 로그인", width: "140px" },
-        { 
-          key: "actions", 
-          header: "관리", 
-          width: "200px", 
-          render: renderActions 
+        {
+          key: "actions",
+          header: "관리",
+          width: "200px",
+          render: renderActions,
         },
       ];
     } else {
@@ -280,62 +284,58 @@ export const ManagementPage: React.FC = () => {
         { key: "id", header: "ID", width: "60px" },
         { key: "title", header: "제목" },
         { key: "author", header: "작성자", width: "120px" },
-        { 
-          key: "category", 
-          header: "카테고리", 
+        {
+          key: "category",
+          header: "카테고리",
           width: "140px",
           render: (row: Entity) => {
-             const postRow = row as Post;
-             const variantMap: any = {
-               development: 'primary',
-               design: 'info',
-               accessibility: 'destructive'
-             };
-             return (
-               <StatusBadge 
-                 variant={variantMap[postRow.category] || 'secondary'} 
-                 pill
-               >
-                 {postRow.category}
-               </StatusBadge>
-             );
-          }
+            const postRow = row as Post;
+            const variantMap: any = {
+              development: "primary",
+              design: "info",
+              accessibility: "destructive",
+            };
+            return (
+              <StatusBadge
+                variant={variantMap[postRow.category] || "secondary"}
+                pill
+              >
+                {postRow.category}
+              </StatusBadge>
+            );
+          },
         },
-        { 
-          key: "status", 
-          header: "상태", 
+        {
+          key: "status",
+          header: "상태",
           width: "120px",
-          render: (row: Entity) => <StatusBadge status={(row as Post).status} /> 
+          render: (row: Entity) => (
+            <StatusBadge status={(row as Post).status} />
+          ),
         },
-        { 
-          key: "views", 
-          header: "조회수", 
+        {
+          key: "views",
+          header: "조회수",
           width: "100px",
-          render: (row: Entity) => (row as Post).views?.toLocaleString() || "0"
+          render: (row: Entity) => (row as Post).views?.toLocaleString() || "0",
         },
         { key: "createdAt", header: "작성일", width: "120px" },
-        { 
-          key: "actions", 
-          header: "관리", 
-          width: "250px", 
-          render: renderActions 
+        {
+          key: "actions",
+          header: "관리",
+          width: "250px",
+          render: renderActions,
         },
       ];
     }
   };
-   
-  
 
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="max-w-7xl mx-auto p-5">
         <div className="mb-5">
-          <h1 className="text-2xl font-bold mb-1 text-gray-800">
-            관리 시스템
-          </h1>
-          <p className="text-gray-600 text-sm">
-            사용자와 게시글을 관리하세요
-          </p>
+          <h1 className="text-2xl font-bold mb-1 text-gray-800">관리 시스템</h1>
+          <p className="text-gray-600 text-sm">사용자와 게시글을 관리하세요</p>
         </div>
 
         <div className="bg-white border border-gray-200 p-2.5">
@@ -392,110 +392,96 @@ export const ManagementPage: React.FC = () => {
             )}
 
             {entityType === "user" ? (
- 
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-2.5 mb-[15px]">
-              
-     
-              <div className="p-[12px_15px] rounded-[3px] border bg-bum-blue-light border-bum-blue-border">
-                <div className="text-[12px] text-bum-gray-600 mb-1">
-                  전체
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-2.5 mb-[15px]">
+                <div className="p-[12px_15px] rounded-[3px] border bg-bum-blue-light border-bum-blue-border">
+                  <div className="text-[12px] text-bum-gray-600 mb-1">전체</div>
+                  <div className="text-[24px] font-bold text-bum-blue-main">
+                    {users.length}
+                  </div>
                 </div>
-                <div className="text-[24px] font-bold text-bum-blue-main">
-                  {users.length}
+
+                <div className="p-[12px_15px] rounded-[3px] border bg-bum-green-light border-bum-green-border">
+                  <div className="text-[12px] text-bum-gray-600 mb-1">활성</div>
+                  <div className="text-[24px] font-bold text-bum-green-main">
+                    {users.filter((u) => u.status === "active").length}
+                  </div>
+                </div>
+
+                <div className="p-[12px_15px] rounded-[3px] border bg-bum-orange-light border-bum-orange-border">
+                  <div className="text-[12px] text-bum-gray-600 mb-1">
+                    비활성
+                  </div>
+                  <div className="text-[24px] font-bold text-bum-orange-main">
+                    {users.filter((u) => u.status === "inactive").length}
+                  </div>
+                </div>
+
+                <div className="p-[12px_15px] rounded-[3px] border bg-bum-red-light border-bum-red-border">
+                  <div className="text-[12px] text-bum-gray-600 mb-1">정지</div>
+                  <div className="text-[24px] font-bold text-bum-red-main">
+                    {users.filter((u) => u.status === "suspended").length}
+                  </div>
+                </div>
+
+                <div className="p-[12px_15px] rounded-[3px] border bg-bum-gray-light border-bum-gray-border">
+                  <div className="text-[12px] text-bum-gray-600 mb-1">
+                    관리자
+                  </div>
+
+                  <div className="text-[24px] font-bold text-bum-gray-main">
+                    {users.filter((u) => u.role === "admin").length}
+                  </div>
                 </div>
               </div>
-
-              <div className="p-[12px_15px] rounded-[3px] border bg-bum-green-light border-bum-green-border">
-                <div className="text-[12px] text-bum-gray-600 mb-1">
-                  활성
+            ) : (
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-2.5 mb-[15px]">
+                <div className="p-[12px_15px] rounded-[3px] border bg-bum-blue-light border-bum-blue-border">
+                  <div className="text-[12px] text-bum-gray-600 mb-1">전체</div>
+                  <div className="text-[24px] font-bold text-bum-blue-main">
+                    {posts.length}
+                  </div>
                 </div>
-                <div className="text-[24px] font-bold text-bum-green-main">
-                  {users.filter((u) => u.status === "active").length}
+
+                <div className="p-[12px_15px] rounded-[3px] border bg-bum-green-light border-bum-green-border">
+                  <div className="text-[12px] text-bum-gray-600 mb-1">
+                    게시됨
+                  </div>
+                  <div className="text-[24px] font-bold text-bum-green-main">
+                    {posts.filter((p) => p.status === "published").length}
+                  </div>
+                </div>
+
+                <div className="p-[12px_15px] rounded-[3px] border bg-bum-orange-light border-bum-orange-border">
+                  <div className="text-[12px] text-bum-gray-600 mb-1">
+                    임시저장
+                  </div>
+                  <div className="text-[24px] font-bold text-bum-orange-main">
+                    {posts.filter((p) => p.status === "draft").length}
+                  </div>
+                </div>
+
+                <div className="p-[12px_15px] rounded-[3px] border bg-bum-red-light border-bum-red-border">
+                  <div className="text-[12px] text-bum-gray-600 mb-1">
+                    보관됨
+                  </div>
+                  <div className="text-[24px] font-bold text-bum-red-main">
+                    {posts.filter((p) => p.status === "archived").length}
+                  </div>
+                </div>
+
+                <div className="p-[12px_15px] rounded-[3px] border bg-bum-gray border-bum-gray-border">
+                  <div className="text-[12px] text-bum-gray-600 mb-1">
+                    총 조회수
+                  </div>
+                  <div className="text-[24px] font-bold text-bum-gray-700">
+                    {posts.reduce((sum, p) => sum + p.views, 0)}
+                  </div>
                 </div>
               </div>
-
-
-              <div className="p-[12px_15px] rounded-[3px] border bg-bum-orange-light border-bum-orange-border">
-                <div className="text-[12px] text-bum-gray-600 mb-1">
-                  비활성
-                </div>
-                <div className="text-[24px] font-bold text-bum-orange-main">
-                  {users.filter((u) => u.status === "inactive").length}
-                </div>
-              </div>
-
-
-              <div className="p-[12px_15px] rounded-[3px] border bg-bum-red-light border-bum-red-border">
-                <div className="text-[12px] text-bum-gray-600 mb-1">
-                  정지
-                </div>
-                <div className="text-[24px] font-bold text-bum-red-main">
-                  {users.filter((u) => u.status === "suspended").length}
-                </div>
-              </div>
-
-              <div className="p-[12px_15px] rounded-[3px] border bg-bum-gray-light border-bum-gray-border">
-                <div className="text-[12px] text-bum-gray-600 mb-1">
-                  관리자
-                </div>
-            
-                <div className="text-[24px] font-bold text-bum-gray-main">
-                  {users.filter((u) => u.role === "admin").length}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-2.5 mb-[15px]">
-              
-              <div className="p-[12px_15px] rounded-[3px] border bg-bum-blue-light border-bum-blue-border">
-                <div className="text-[12px] text-bum-gray-600 mb-1">
-                  전체
-                </div>
-                <div className="text-[24px] font-bold text-bum-blue-main">
-                  {posts.length}
-                </div>
-              </div>
-
-              <div className="p-[12px_15px] rounded-[3px] border bg-bum-green-light border-bum-green-border">
-                <div className="text-[12px] text-bum-gray-600 mb-1">
-                  게시됨
-                </div>
-                <div className="text-[24px] font-bold text-bum-green-main">
-                  {posts.filter((p) => p.status === "published").length}
-                </div>
-              </div>
-
-              <div className="p-[12px_15px] rounded-[3px] border bg-bum-orange-light border-bum-orange-border">
-                <div className="text-[12px] text-bum-gray-600 mb-1">
-                  임시저장
-                </div>
-                <div className="text-[24px] font-bold text-bum-orange-main">
-                  {posts.filter((p) => p.status === "draft").length}
-                </div>
-              </div>
-
-              <div className="p-[12px_15px] rounded-[3px] border bg-bum-red-light border-bum-red-border">
-                <div className="text-[12px] text-bum-gray-600 mb-1">
-                  보관됨
-                </div>
-                <div className="text-[24px] font-bold text-bum-red-main">
-                  {posts.filter((p) => p.status === "archived").length}
-                </div>
-              </div>
-
-              <div className="p-[12px_15px] rounded-[3px] border bg-bum-gray-light border-bum-gray-border">
-                <div className="text-[12px] text-bum-gray-600 mb-1">
-                  총 조회수
-                </div>
-                <div className="text-[24px] font-bold text-bum-gray-700">
-                  {posts.reduce((sum, p) => sum + p.views, 0)}
-                </div>
-              </div>
-            </div>
-          )}
+            )}
 
             <div className="border border-gray-200 bg-white overflow-x-auto">
-              <DataTable 
+              <DataTable
                 columns={renderTableColumns()}
                 data={data}
                 striped
@@ -559,9 +545,7 @@ export const ManagementPage: React.FC = () => {
                 width="full"
                 fieldType="email"
               />
-              <div
-                className="grid grid-cols-2 gap-4"
-              >
+              <div className="grid grid-cols-2 gap-4">
                 <FormSelect
                   name="role"
                   value={formData.role || "user"}
@@ -604,9 +588,7 @@ export const ManagementPage: React.FC = () => {
                 width="full"
                 fieldType="postTitle"
               />
-              <div
-                className="grid grid-cols-2 gap-4"
-              >
+              <div className="grid grid-cols-2 gap-4">
                 <FormInput
                   name="author"
                   value={formData.author || ""}
@@ -712,9 +694,7 @@ export const ManagementPage: React.FC = () => {
                 width="full"
                 fieldType="email"
               />
-              <div
-                className="grid grid-cols-2 gap-4"
-              >
+              <div className="grid grid-cols-2 gap-4">
                 <FormSelect
                   name="role"
                   value={formData.role || "user"}
@@ -757,9 +737,7 @@ export const ManagementPage: React.FC = () => {
                 width="full"
                 fieldType="postTitle"
               />
-              <div
-                className="grid grid-cols-2 gap-4"
-              >
+              <div className="grid grid-cols-2 gap-4">
                 <FormInput
                   name="author"
                   value={formData.author || ""}

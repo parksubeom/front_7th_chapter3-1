@@ -1,256 +1,271 @@
-/* 1. Tailwind v4 엔진 로드 */
+/* 1. Tailwind v4 엔진 및 플러그인 로드 */
 @import "tailwindcss";
 
+/* 2. 다크모드 설정 */
 @custom-variant dark (&:is(.dark *));
+
+/* 3. 테마 설정 (Tailwind 유틸리티 클래스 생성) */
 @theme {
-  /* --------------------------------------------------------
-     Shadcn Semantic Colors (Standard)
-     -------------------------------------------------------- */
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+  /* ========================================================
+     [Semantic] 역할별 색상 매핑
+     ======================================================== */
+
+  /* 기본 요소 */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-
+  /* 컨테이너 */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
 
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
+  /* 액션 (버튼 등) */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
 
-  /* --------------------------------------------------------
-     ✅ [BDS Custom] Legacy Extensions
-     -------------------------------------------------------- */
+  /* 상태 (뱃지, 알림) */
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
-
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
-
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-gray-solid: var(--status-archived);
 
-  /* 뱃지(보관됨) 전용 진한 회색 */
-  --color-gray-solid: var(--legacy-gray-solid);
+  /* 폼 요소 */
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 
-  /* --------------------------------------------------------
-     ✅ [Interaction Tokens] Button Hover/Border Colors
-     버튼 컴포넌트에서 사용할 구체적인 상호작용 컬러들입니다.
-     -------------------------------------------------------- */
-  --color-bum-blue-dark: var(--legacy-blue-dark);
-  --color-bum-red-dark: var(--legacy-red-dark);
-  --color-bum-green-dark: var(--legacy-green-dark);
-  
-  --color-bum-gray-200: var(--legacy-gray-200);
-  --color-bum-gray-300: var(--legacy-gray-300);
-  --color-bum-gray-800: var(--legacy-gray-800);
+  /* ========================================================
+     ✅ [BDS Extension] 레거시 호환용 유틸리티 (복원됨)
+     새로 구축한 스케일(50~900)에 레거시 이름을 매핑합니다.
+     ======================================================== */
 
-  /* --------------------------------------------------------
-     ✅ [Legacy Utilities] Page & Layout Colors
-     -------------------------------------------------------- */
-  --color-bum-bg-page: var(--legacy-bg-page);
-  
-  --color-bum-blue-main: var(--legacy-blue-main);
-  --color-bum-blue-light: var(--legacy-blue-light);
-  --color-bum-blue-border: var(--legacy-blue-border);
+  /* Page & Layout */
+  --color-bum-bg-page: var(--background-page);
 
-  --color-bum-green-main: var(--legacy-green-main);
-  --color-bum-green-light: var(--legacy-green-light);
-  --color-bum-green-border: var(--legacy-green-border);
+  /* Blue (Brand) */
+  --color-bum-blue-main: var(--blue-600);
+  --color-bum-blue-light: var(--blue-50);
+  --color-bum-blue-border: var(--blue-200);
+  --color-bum-blue-dark: var(--blue-700);
 
-  --color-bum-orange-main: var(--legacy-orange-main);
-  --color-bum-orange-light: var(--legacy-orange-light);
-  --color-bum-orange-border: var(--legacy-orange-border);
+  /* Green (Success) */
+  --color-bum-green-main: var(--green-600);
+  --color-bum-green-light: var(--green-50);
+  --color-bum-green-border: var(--green-300);
+  --color-bum-green-dark: var(--green-700);
 
-  --color-bum-red-main: var(--legacy-red-main);
-  --color-bum-red-light: var(--legacy-red-light);
-  --color-bum-red-border: var(--legacy-red-border);
+  /* Orange (Warning) */
+  --color-bum-orange-main: var(--orange-600);
+  --color-bum-orange-light: var(--orange-50);
+  --color-bum-orange-border: var(--orange-300);
 
-  --color-bum-gray-main: var(--legacy-gray-700);
-  --color-bum-gray-light: var(--legacy-gray-100);
-  --color-bum-gray-border: var(--legacy-gray-border);
-  
-  --color-bum-gray-350: var(--legacy-gray-350);
-  --color-bum-gray-500: var(--legacy-gray-500);
-  --color-bum-gray-600: var(--legacy-gray-600);
-  --color-bum-gray-700: var(--legacy-gray-700);
+  /* Red (Danger) */
+  --color-bum-red-main: var(--red-600);
+  --color-bum-red-light: var(--red-50);
+  --color-bum-red-border: var(--red-300);
+  --color-bum-red-dark: var(--red-700);
 
-  /* Radius & Animation */
+  /* Gray (Neutral) */
+  --color-bum-gray: var(--gray-100); /* #f5f5f5 */
+  --color-bum-gray-200: var(--gray-200); /* hover */
+  --color-bum-gray-300: var(--gray-300); /* border */
+  --color-bum-gray-border: var(--gray-400); /* #bdbdbd */
+  --color-bum-gray-600: var(--gray-700); /* #666 -> 700 */
+  --color-bum-gray-700: var(--gray-800); /* #424242 -> 800 */
+  --color-bum-gray-800: var(--gray-900); /* #333 -> 900 */
+
+  /* 반경 (Radius) */
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-  
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-
-  @keyframes accordion-down {
-    from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
-  }
-  @keyframes accordion-up {
-    from { height: var(--radix-accordion-content-height); }
-    to { height: 0; }
-  }
 }
 
-/* 4. CSS 변수 정의 (Values) */
+/* 4. CSS 변수 정의 */
 @layer base {
   :root {
     /* ==================================================================
-       1. LEGACY PRIMITIVES (Original Hex Values)
+       1. PRIMITIVE TOKENS (원시 토큰) - 색상 스케일
        ================================================================== */
-    
-    /* Page Background */
-    --legacy-bg-page: #f0f0f0;
 
-    /* Brand Colors (Blue) */
-    --legacy-blue-main: #1775D2;  /* .btn-primary (Development) */
-    --legacy-blue-dark: #1565c0;  /* hover / border */
-    --legacy-blue-light: #e3f2fd;
-    --legacy-blue-border: #90caf9; 
-    
-    /* Status Colors (Red) */
-    --legacy-red-main: #d32f2f;   /* .btn-danger */
-    --legacy-red-dark: #c62828;   /* hover / border */
-    --legacy-red-light: #ffebee;   
-    --legacy-red-border: #e57373;  
+    /* [Blue] 브랜드 메인 컬러 (#1775D2 기반) */
+    --blue-50: #e3f2fd; /* bum-blue-light */
+    --blue-100: #bbdefb;
+    --blue-200: #90caf9; /* bum-blue-border */
+    --blue-300: #64b5f6;
+    --blue-400: #42a5f5;
+    --blue-500: #2196f3;
+    --blue-600: #1775d2; /* bum-blue-main */
+    --blue-700: #1565c0; /* bum-blue-dark */
+    --blue-800: #0d47a1;
+    --blue-900: #002171;
 
-    /* Status Colors (Green) */
-    --legacy-green-main: #388e3c; /* .btn-success */
-    --legacy-green-dark: #2e7d32; /* hover / border */
-    --legacy-green-light: #e8f5e9; 
-    --legacy-green-border: #81c784;
+    /* [Gray] 무채색 */
+    --gray-0: #ffffff;
+    --gray-50: #fafafa;
+    --gray-100: #f5f5f5; /* bum-gray */
+    --gray-200: #e0e0e0; /* bum-gray-200 */
+    --gray-300: #dddddd; /* bum-gray-300 */
+    --gray-350: #cccccc;
+    --gray-400: #bdbdbd; /* bum-gray-border */
+    --gray-500: #999999;
+    --gray-600: #757474; /* Archived Badge */
+    --gray-700: #666666; /* bum-gray-600 (#666) */
+    --gray-800: #424242; /* bum-gray-700 (#424) */
+    --gray-900: #333333; /* bum-gray-800 (#333) */
+    --gray-950: #1e2124;
 
-    /* Status Colors (Orange) */
-    --legacy-orange-main: #f57c00; /* .badge-warning */
-    --legacy-orange-light: #fff3e0;
-    --legacy-orange-border: #ffb74d;
+    /* [Green] 성공 (#388e3c 기반) */
+    --green-50: #e8f5e9; /* bum-green-light */
+    --green-100: #c8e6c9;
+    --green-200: #a5d6a7;
+    --green-300: #81c784; /* bum-green-border */
+    --green-400: #66bb6a;
+    --green-500: #4caf50;
+    --green-600: #388e3c; /* bum-green-main */
+    --green-700: #2e7d32; /* bum-green-dark */
+    --green-800: #1b5e20;
+    --green-900: #003300;
 
-    /* Info (Blue) */
-    --legacy-info-main: #0288d1;
+    /* [Red] 위험 (#d32f2f 기반) */
+    --red-50: #ffebee; /* bum-red-light */
+    --red-100: #ffcdd2;
+    --red-200: #ef9a9a;
+    --red-300: #e57373; /* bum-red-border */
+    --red-400: #ef5350;
+    --red-500: #f44336;
+    --red-600: #d32f2f; /* bum-red-main */
+    --red-700: #c62828; /* bum-red-dark */
+    --red-800: #b71c1c;
+    --red-900: #7f0000;
 
-    /* Grayscale */
-    --legacy-white: #ffffff;
-    --legacy-black: #000000;
-    
-    --legacy-gray-50: #fafafa;
-    --legacy-gray-100: #f5f5f5; /* .btn-secondary bg */
-    --legacy-gray-200: #e0e0e0; /* hover */
-    --legacy-gray-300: #dddddd; /* border */
-    --legacy-gray-350: #cccccc; /* Tab border */
-    --legacy-gray-400: #999999; /* muted text */
-    --legacy-gray-500: #999999; 
-    --legacy-gray-600: #666666; 
-    --legacy-gray-border: #bdbdbd; 
-    --legacy-gray-700: #424242;    
-    --legacy-gray-800: #333333; /* main text */
+    /* [Orange] 경고 (#f57c00 기반) */
+    --orange-50: #fff3e0; /* bum-orange-light */
+    --orange-100: #ffe0b2;
+    --orange-200: #ffcc80;
+    --orange-300: #ffb74d; /* bum-orange-border */
+    --orange-400: #ffa726;
+    --orange-500: #ff9800;
+    --orange-600: #f57c00; /* bum-orange-main */
+    --orange-700: #ef6c00;
+    --orange-800: #e65100;
+    --orange-900: #e65100;
 
-    /* Archived Badge (Solid Gray) */
-    --legacy-gray-solid: #757474; 
+    /* [Cyan] 정보 (#0288d1 기반) */
+    --cyan-500: #0288d1; /* Main Info */
+    --cyan-600: #0277bd;
 
-    /* Radius */
-    --legacy-radius: 0.25rem; /* 4px */
-
+    /* [Radius] */
+    --radius-base: 0.25rem;
 
     /* ==================================================================
-       2. SEMANTIC MAPPING (Shadcn Variables)
+       2. SEMANTIC TOKENS (의미론적 토큰)
        ================================================================== */
-    
-    --background: var(--legacy-white);
-    --foreground: var(--legacy-gray-800);
 
-    --card: var(--legacy-white);
-    --card-foreground: var(--legacy-gray-800);
+    /* [배경] */
+    --background: var(--gray-0);
+    --foreground: var(--gray-900);
+    --background-page: #f0f0f0;
 
-    --popover: var(--legacy-white);
-    --popover-foreground: var(--legacy-gray-800);
+    --card: var(--gray-0);
+    --card-foreground: var(--gray-900);
 
-    /* Primary -> Legacy Blue Main (#1775D2) */
-    --primary: var(--legacy-blue-main);
-    --primary-foreground: var(--legacy-white);
+    --popover: var(--gray-0);
+    --popover-foreground: var(--gray-900);
 
-    /* Secondary -> Legacy Gray Light (#f5f5f5) */
-    --secondary: var(--legacy-gray-100);
-    --secondary-foreground: var(--legacy-gray-800);
+    /* [액션] */
+    --primary: var(--blue-600);
+    --primary-foreground: var(--gray-0);
 
-    /* Destructive -> Legacy Red (#d32f2f) */
-    --destructive: var(--legacy-red-main);
-    --destructive-foreground: var(--legacy-white);
+    --secondary: var(--gray-100);
+    --secondary-foreground: var(--gray-900);
 
-    /* BDS Extensions */
-    --success: var(--legacy-green-main);
-    --success-foreground: var(--legacy-white);
+    --destructive: var(--red-600);
+    --destructive-foreground: var(--gray-0);
 
-    --warning: var(--legacy-orange-main);
-    --warning-foreground: var(--legacy-white);
+    --accent: var(--gray-100);
+    --accent-foreground: var(--blue-600);
 
-    --info: var(--legacy-info-main);
-    --info-foreground: var(--legacy-white);
+    /* [상태] */
+    --success: var(--green-600);
+    --success-foreground: var(--gray-0);
 
-    --muted: var(--legacy-gray-100);
-    --muted-foreground: var(--legacy-gray-400);
+    --warning: var(--orange-600);
+    --warning-foreground: var(--gray-0);
 
-    --accent: var(--legacy-gray-100);
-    --accent-foreground: var(--legacy-blue-main);
+    --info: var(--cyan-500);
+    --info-foreground: var(--gray-0);
 
-    --border: var(--legacy-gray-300);
-    --input: var(--legacy-gray-300);
-    --ring: var(--legacy-blue-main);
+    --status-archived: var(--gray-600); /* #757474 */
 
-    --radius: var(--legacy-radius);
+    --muted: var(--gray-100);
+    --muted-foreground: var(--gray-500);
+
+    /* [테두리] */
+    --border: var(--gray-300);
+    --input: var(--gray-300);
+    --ring: var(--blue-600);
+
+    /* [기타] */
+    --radius: var(--radius-base);
   }
 
+  /* ==================================================================
+     3. DARK MODE & GLOBAL
+     ================================================================== */
   .dark {
-    /* Dark Mode Placeholder */
-    --background: var(--legacy-gray-800);
-    --foreground: var(--legacy-gray-100);
+    --background: var(--gray-950);
+    --foreground: var(--gray-100);
     --card: #1a1a1a;
-    --card-foreground: var(--legacy-gray-100);
+    --card-foreground: var(--gray-100);
     --popover: #1a1a1a;
-    --popover-foreground: var(--legacy-gray-100);
-    --primary: #90caf9;
-    --primary-foreground: var(--legacy-gray-800);
-    --secondary: var(--legacy-gray-800);
-    --secondary-foreground: var(--legacy-gray-100);
+    --popover-foreground: var(--gray-100);
+
+    --primary: var(--blue-300);
+    --primary-foreground: var(--gray-950);
+
+    --secondary: var(--gray-800);
+    --secondary-foreground: var(--gray-100);
+
     --muted: #2a2a2a;
-    --muted-foreground: var(--legacy-gray-400);
+    --muted-foreground: var(--gray-400);
+
     --accent: #2a2a2a;
-    --accent-foreground: var(--legacy-white);
-    --destructive: #ef5350;
-    --destructive-foreground: var(--legacy-white);
-    --border: #404040;
-    --input: #404040;
-    --ring: #90caf9;
+    --accent-foreground: var(--gray-0);
+
+    --destructive: var(--red-400);
+    --destructive-foreground: var(--gray-0);
+
+    --border: var(--gray-700);
+    --input: var(--gray-700);
+    --ring: var(--blue-300);
   }
 
-body {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
     @apply bg-background text-foreground;
-    
-    /* ✅ [Legacy Font] Arial 강제 적용 */
     font-family: Arial, sans-serif;
-    
-    /* ✅ [Legacy Line Height] */
     line-height: 1.5;
   }
 
-  /* ✅ [Legacy Input Styles] */
-  /* 레거시에서는 input, select 등이 독자적인 폰트를 가질 수 있으므로 상속 강제 */
-  input, textarea, select, button {
-    font-family: Arial, sans-serif;
+  input,
+  textarea,
+  select,
+  button {
+    font-family: inherit;
   }
 }
