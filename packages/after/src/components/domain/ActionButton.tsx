@@ -53,7 +53,6 @@ export const ActionButton: React.FC<ActionButtonProps> = ({
         delete: '삭제',
         publish: '게시',
         archive: '보관',
-        // ✅ [Fix] 복원 라벨 추가
         restore: '복원',
       };
       computedChildren = labelMap[action] || '';
@@ -63,8 +62,7 @@ export const ActionButton: React.FC<ActionButtonProps> = ({
     if (action === 'delete') computedVariant = 'danger';
     if (action === 'publish') computedVariant = 'success';
     if (action === 'archive') computedVariant = 'secondary';
-    // ✅ [Fix] 복원 버튼 스타일 (눈에 띄면서도 구분되게)
-    if (action === 'restore') computedVariant = 'outline'; 
+    if (action === 'restore') computedVariant = 'primary'; 
   }
 
   return (

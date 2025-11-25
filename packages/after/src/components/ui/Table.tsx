@@ -1,22 +1,32 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// 1. Table Root에 스타일 Props 추가
+// -------------------------------------------------------------------------
+// 1. Table Root
+// -------------------------------------------------------------------------
 interface TableProps extends React.ComponentProps<"table"> {
   striped?: boolean;
   bordered?: boolean;
-  hover?: boolean; // Shadcn 기본은 hover가 있지만, 명시적 제어를 위해 추가
+  hover?: boolean;
 }
 
 function Table({ className, striped, bordered, hover = true, ...props }: TableProps) {
   return (
-    <div className="relative w-full overflow-x-auto">
+    <div className="relative w-full overflow-x-auto table-container">
       <table
         className={cn(
-          "w-full caption-bottom text-sm",
-          // [BDS Style Extensions]
-          striped && "[&_tbody_tr:nth-child(even)]:bg-muted/50", // 줄무늬
-          bordered && "border-collapse border border-border [&_td]:border [&_td]:border-border [&_th]:border [&_th]:border-border", // 테두리
+          // Base: width 100%, border-collapse, font-size 0.875rem (14px), bg-white
+          "w-full border-collapse text-[0.875rem] bg-white font-sans",
+          
+          // [Legacy Style: Striped]
+          // .table-striped tbody tr:nth-child(even) { background-color: #fafafa; }
+          striped && "[&_tbody_tr:nth-child(even)]:bg-[#fafafa]",
+          
+          // [Legacy Style: Bordered]
+          // .table-bordered { border: 1px solid rgba(0, 0, 0, 0.12); }
+          // .table-bordered th, .table-bordered td { border: 1px solid rgba(0, 0, 0, 0.12); }
+          bordered && "border border-[rgba(0,0,0,0.12)] [&_th]:border [&_th]:border-[rgba(0,0,0,0.12)] [&_td]:border [&_td]:border-[rgba(0,0,0,0.12)]",
+          
           className
         )}
         {...props}
@@ -25,19 +35,35 @@ function Table({ className, striped, bordered, hover = true, ...props }: TablePr
   )
 }
 
+// -------------------------------------------------------------------------
+// 2. Table Header (Thead)
+// -------------------------------------------------------------------------
 function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
-  return <thead className={cn("[&_tr]:border-b", className)} {...props} />
+  return (
+    <thead 
+      // .table thead { background-color: #fafafa; }
+      className={cn("bg-[#fafafa]", className)} 
+      {...props} 
+    />
+  )
 }
 
+// -------------------------------------------------------------------------
+// 3. Table Body (Tbody)
+// -------------------------------------------------------------------------
 function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
   return (
     <tbody
-      className={cn("[&_tr:last-child]:border-0", className)}
+      // .table tbody tr:last-child td { border-bottom: none; }
+      className={cn("[&_tr:last-child_td]:border-b-0", className)}
       {...props}
     />
   )
 }
 
+// -------------------------------------------------------------------------
+// 4. Table Footer (Tfoot) - Optional (Standard Style)
+// -------------------------------------------------------------------------
 function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
   return (
     <tfoot
@@ -50,11 +76,17 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
   )
 }
 
+// -------------------------------------------------------------------------
+// 5. Table Row (Tr)
+// -------------------------------------------------------------------------
 function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
   return (
     <tr
       className={cn(
-        "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+        "transition-colors data-[state=selected]:bg-muted",
+        // .table-hover tbody tr:hover { background-color: rgba(0, 0, 0, 0.04); }
+        // (hover prop은 Table 컴포넌트에서 제어하거나 기본 동작으로 둡니다. 여기선 기본 적용)
+        "hover:bg-[rgba(0,0,0,0.04)]",
         className
       )}
       {...props}
@@ -62,11 +94,32 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
   )
 }
 
+// -------------------------------------------------------------------------
+// 6. Table Head Cell (Th) - Legacy CSS Applied
+// -------------------------------------------------------------------------
 function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   return (
     <th
       className={cn(
-        "h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+        // padding: 16px
+        "p-4",
+        // text-align: left
+        "text-left align-middle",
+        // font-weight: 500
+        "font-medium",
+        // font-size: 0.75rem
+        "text-[0.75rem]",
+        // color: rgba(0, 0, 0, 0.6)
+        "text-[rgba(0,0,0,0.6)]",
+        // text-transform: uppercase
+        "uppercase",
+        // letter-spacing: 0.03em
+        "tracking-[0.03em]",
+        // border-bottom: 2px solid rgba(0, 0, 0, 0.12)
+        "border-b-2 border-[rgba(0,0,0,0.12)]",
+        
+        // Checkbox alignment correction
+        "[&:has([role=checkbox])]:pr-0",
         className
       )}
       {...props}
@@ -74,11 +127,23 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   )
 }
 
+// -------------------------------------------------------------------------
+// 7. Table Data Cell (Td) - Legacy CSS Applied
+// -------------------------------------------------------------------------
 function TableCell({ className, ...props }: React.ComponentProps<"td">) {
   return (
     <td
       className={cn(
-        "p-4 align-middle [&:has([role=checkbox])]:pr-0",
+        // padding: 16px
+        "p-4",
+        "align-middle",
+        // color: rgba(0, 0, 0, 0.87)
+        "text-[rgba(0,0,0,0.87)]",
+        // border-bottom: 1px solid rgba(0, 0, 0, 0.08)
+        "border-b border-[rgba(0,0,0,0.08)]",
+        
+        // Checkbox alignment correction
+        "[&:has([role=checkbox])]:pr-0",
         className
       )}
       {...props}

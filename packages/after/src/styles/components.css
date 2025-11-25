@@ -1,12 +1,11 @@
 /* 1. Tailwind v4 엔진 로드 */
 @import "tailwindcss";
-@plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
-
-/* 3. 테마 설정 (Tailwind 유틸리티 클래스 생성) */
 @theme {
-  /* Shadcn Semantic Colors 매핑 */
+  /* --------------------------------------------------------
+     Shadcn Semantic Colors (Standard)
+     -------------------------------------------------------- */
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -34,7 +33,9 @@
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
 
-  /* ✅ [BDS Custom] Legacy Colors Extension */
+  /* --------------------------------------------------------
+     ✅ [BDS Custom] Legacy Extensions
+     -------------------------------------------------------- */
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
 
@@ -44,10 +45,24 @@
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
 
-  /* ✅ [New] Solid Gray (Archived Badge) */
+  /* 뱃지(보관됨) 전용 진한 회색 */
   --color-gray-solid: var(--legacy-gray-solid);
 
-  /* ✅ [Legacy Utilities] Bum Design System Utilities */
+  /* --------------------------------------------------------
+     ✅ [Interaction Tokens] Button Hover/Border Colors
+     버튼 컴포넌트에서 사용할 구체적인 상호작용 컬러들입니다.
+     -------------------------------------------------------- */
+  --color-bum-blue-dark: var(--legacy-blue-dark);
+  --color-bum-red-dark: var(--legacy-red-dark);
+  --color-bum-green-dark: var(--legacy-green-dark);
+  
+  --color-bum-gray-200: var(--legacy-gray-200);
+  --color-bum-gray-300: var(--legacy-gray-300);
+  --color-bum-gray-800: var(--legacy-gray-800);
+
+  /* --------------------------------------------------------
+     ✅ [Legacy Utilities] Page & Layout Colors
+     -------------------------------------------------------- */
   --color-bum-bg-page: var(--legacy-bg-page);
   
   --color-bum-blue-main: var(--legacy-blue-main);
@@ -72,12 +87,11 @@
   --color-bum-gray-600: var(--legacy-gray-600);
   --color-bum-gray-700: var(--legacy-gray-700);
 
-  /* Radius 매핑 */
+  /* Radius & Animation */
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-
-  /* Animation */
+  
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
@@ -91,7 +105,7 @@
   }
 }
 
-/* 4. CSS 변수 정의 */
+/* 4. CSS 변수 정의 (Values) */
 @layer base {
   :root {
     /* ==================================================================
@@ -102,23 +116,25 @@
     --legacy-bg-page: #f0f0f0;
 
     /* Brand Colors (Blue) */
-    --legacy-blue-main: #1775D2;  /* ✅ [Updated] Development Color */
-    --legacy-blue-dark: #1565c0;
+    --legacy-blue-main: #1775D2;  /* .btn-primary (Development) */
+    --legacy-blue-dark: #1565c0;  /* hover / border */
     --legacy-blue-light: #e3f2fd;
     --legacy-blue-border: #90caf9; 
     
     /* Status Colors (Red) */
-    --legacy-red-main: #d32f2f;
+    --legacy-red-main: #d32f2f;   /* .btn-danger */
+    --legacy-red-dark: #c62828;   /* hover / border */
     --legacy-red-light: #ffebee;   
     --legacy-red-border: #e57373;  
 
     /* Status Colors (Green) */
-    --legacy-green-main: #388e3c;
+    --legacy-green-main: #388e3c; /* .btn-success */
+    --legacy-green-dark: #2e7d32; /* hover / border */
     --legacy-green-light: #e8f5e9; 
     --legacy-green-border: #81c784;
 
     /* Status Colors (Orange) */
-    --legacy-orange-main: #f57c00;
+    --legacy-orange-main: #f57c00; /* .badge-warning */
     --legacy-orange-light: #fff3e0;
     --legacy-orange-border: #ffb74d;
 
@@ -127,21 +143,22 @@
 
     /* Grayscale */
     --legacy-white: #ffffff;
+    --legacy-black: #000000;
+    
     --legacy-gray-50: #fafafa;
-    --legacy-gray-100: #f5f5f5;
-    --legacy-gray-200: #e0e0e0;
-    --legacy-gray-300: #dddddd;
-    --legacy-gray-350: #cccccc;    
-    --legacy-gray-400: #999999;
-    --legacy-gray-500: #999999;    
-    --legacy-gray-600: #666666;    
+    --legacy-gray-100: #f5f5f5; /* .btn-secondary bg */
+    --legacy-gray-200: #e0e0e0; /* hover */
+    --legacy-gray-300: #dddddd; /* border */
+    --legacy-gray-350: #cccccc; /* Tab border */
+    --legacy-gray-400: #999999; /* muted text */
+    --legacy-gray-500: #999999; 
+    --legacy-gray-600: #666666; 
     --legacy-gray-border: #bdbdbd; 
     --legacy-gray-700: #424242;    
-    --legacy-gray-800: #333333;
-    --legacy-black: #000000;
+    --legacy-gray-800: #333333; /* main text */
 
-    /* ✅ [Updated] Solid Gray (#757575) for Archived Badge */
-    --legacy-gray-solid: #757575; 
+    /* Archived Badge (Solid Gray) */
+    --legacy-gray-solid: #757474; 
 
     /* Radius */
     --legacy-radius: 0.25rem; /* 4px */
@@ -160,12 +177,15 @@
     --popover: var(--legacy-white);
     --popover-foreground: var(--legacy-gray-800);
 
+    /* Primary -> Legacy Blue Main (#1775D2) */
     --primary: var(--legacy-blue-main);
     --primary-foreground: var(--legacy-white);
 
+    /* Secondary -> Legacy Gray Light (#f5f5f5) */
     --secondary: var(--legacy-gray-100);
     --secondary-foreground: var(--legacy-gray-800);
 
+    /* Destructive -> Legacy Red (#d32f2f) */
     --destructive: var(--legacy-red-main);
     --destructive-foreground: var(--legacy-white);
 
@@ -215,10 +235,19 @@
     --ring: #90caf9;
   }
 
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
+body {
     @apply bg-background text-foreground;
+    
+    /* ✅ [Legacy Font] Arial 강제 적용 */
+    font-family: Arial, sans-serif;
+    
+    /* ✅ [Legacy Line Height] */
+    line-height: 1.5;
+  }
+
+  /* ✅ [Legacy Input Styles] */
+  /* 레거시에서는 input, select 등이 독자적인 폰트를 가질 수 있으므로 상속 강제 */
+  input, textarea, select, button {
+    font-family: Arial, sans-serif;
   }
 }
