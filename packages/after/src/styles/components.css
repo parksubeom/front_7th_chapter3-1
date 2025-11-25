@@ -81,7 +81,10 @@
   --color-bum-red-light: var(--legacy-red-light);
   --color-bum-red-border: var(--legacy-red-border);
 
+  --color-bum-gray-main: var(--legacy-gray-700);
+  --color-bum-gray-light: var(--legacy-gray-100);
   --color-bum-gray-border: var(--legacy-gray-border);
+  
   --color-bum-gray-350: var(--legacy-gray-350);
   --color-bum-gray-500: var(--legacy-gray-500);
   --color-bum-gray-600: var(--legacy-gray-600);

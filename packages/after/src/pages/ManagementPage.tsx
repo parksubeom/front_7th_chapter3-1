@@ -434,12 +434,12 @@ export const ManagementPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-[12px_15px] rounded-[3px] border bg-bum-gray-100 border-bum-gray-border">
+              <div className="p-[12px_15px] rounded-[3px] border bg-bum-gray-light border-bum-gray-border">
                 <div className="text-[12px] text-bum-gray-600 mb-1">
                   관리자
                 </div>
             
-                <div className="text-[24px] font-bold text-bum-blue-main">
+                <div className="text-[24px] font-bold text-bum-gray-main">
                   {users.filter((u) => u.role === "admin").length}
                 </div>
               </div>
@@ -483,7 +483,7 @@ export const ManagementPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-[12px_15px] rounded-[3px] border bg-bum-gray-100 border-bum-gray-border">
+              <div className="p-[12px_15px] rounded-[3px] border bg-bum-gray-light border-bum-gray-border">
                 <div className="text-[12px] text-bum-gray-600 mb-1">
                   총 조회수
                 </div>
