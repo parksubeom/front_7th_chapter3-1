@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import {
   Table,
@@ -168,7 +168,6 @@ export function DataTable<T extends Record<string, any>>({
                 >
                   {columns.map((col) => (
                     <TableCell key={`${rowIndex}-${col.key}`}>
-                      {/* ✨ [핵심] Legacy Table의 renderCell 로직을 여기서 대체 */}
                       {col.render ? col.render(row) : row[col.key]}
                     </TableCell>
                   ))}
