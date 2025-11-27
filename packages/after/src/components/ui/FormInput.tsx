@@ -1,6 +1,6 @@
 import React from "react";
 import { Input } from "@/components/ui/Input";
-import { Label } from "@/components/ui/Label";
+import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
 // ✅ [Fix] onChange 타입을 React.InputHTMLAttributes에서 제외하고 string으로 재정의

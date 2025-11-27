@@ -4,7 +4,7 @@ import {
   NativeSelectOption,
   NativeSelectOptGroup,
 } from "@/components/ui/NativeSelect"; // 파일명 대소문자 주의
-import { Label } from "@/components/ui/Label";
+import { Label } from "@/components/ui/label";
 
 const meta = {
   title: "UI/NativeSelect",

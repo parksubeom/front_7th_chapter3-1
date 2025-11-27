@@ -1,6 +1,6 @@
 import React from "react";
 import { NativeSelect } from "@/components/ui/NativeSelect"; // ✅ 교체됨
-import { Label } from "@/components/ui/Label";
+import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
 // -------------------------------------------------------------------------

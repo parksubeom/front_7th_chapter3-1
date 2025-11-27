@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 // ✅ Import Path 수정: input -> Input, label -> Label, button -> Button
 import { Input } from "@/components/ui/Input";
-import { Label } from "@/components/ui/Label";
+import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/Button";
 
 const meta = {
