@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 // ✅ 1. UI Components (BDS)
 import { Alert, Modal } from "../components/ui"; // index.ts export 확인 필요
@@ -9,7 +10,6 @@ import { Button } from "@/components/ui/Button"; // UI 버튼
 import { ActionButton } from "@/components/domain/ActionButton";
 import { UserForm } from "@/components/domain/UserForm";
 import { PostForm } from "@/components/domain/PostForm";
-
 
 // ✅ 3. Hooks & Services
 import { useManagementPage } from "@/hooks/useManagementPage";
@@ -44,19 +44,53 @@ export const ManagementPage: React.FC = () => {
       const users = data as User[];
       return [
         { label: "전체", value: users.length, color: "blue" },
-        { label: "활성", value: users.filter((u) => u.status === "active").length, color: "green" },
-        { label: "비활성", value: users.filter((u) => u.status === "inactive").length, color: "orange" },
-        { label: "정지", value: users.filter((u) => u.status === "suspended").length, color: "red" },
-        { label: "관리자", value: users.filter((u) => u.role === "admin").length, color: "gray", textColorOverride: "text-bum-blue-main" },
+        {
+          label: "활성",
+          value: users.filter((u) => u.status === "active").length,
+          color: "green",
+        },
+        {
+          label: "비활성",
+          value: users.filter((u) => u.status === "inactive").length,
+          color: "orange",
+        },
+        {
+          label: "정지",
+          value: users.filter((u) => u.status === "suspended").length,
+          color: "red",
+        },
+        {
+          label: "관리자",
+          value: users.filter((u) => u.role === "admin").length,
+          color: "gray",
+          textColorOverride: "text-bum-blue-main",
+        },
       ];
     } else {
       const posts = data as Post[];
       return [
         { label: "전체", value: posts.length, color: "blue" },
-        { label: "게시됨", value: posts.filter((p) => p.status === "published").length, color: "green" },
-        { label: "임시저장", value: posts.filter((p) => p.status === "draft").length, color: "orange" },
-        { label: "보관됨", value: posts.filter((p) => p.status === "archived").length, color: "red" },
-        { label: "총 조회수", value: posts.reduce((sum, p) => sum + p.views, 0), color: "gray", textColorOverride: "text-bum-gray-700" },
+        {
+          label: "게시됨",
+          value: posts.filter((p) => p.status === "published").length,
+          color: "green",
+        },
+        {
+          label: "임시저장",
+          value: posts.filter((p) => p.status === "draft").length,
+          color: "orange",
+        },
+        {
+          label: "보관됨",
+          value: posts.filter((p) => p.status === "archived").length,
+          color: "red",
+        },
+        {
+          label: "총 조회수",
+          value: posts.reduce((sum, p) => sum + p.views, 0),
+          color: "gray",
+          textColorOverride: "text-bum-gray-700",
+        },
       ];
     }
   })();
@@ -76,7 +110,6 @@ export const ManagementPage: React.FC = () => {
 
         {/* Content Card */}
         <Card className="p-2.5 shadow-none border-bum-gray-300 bg-white">
-          
           {/* Tabs */}
           <div className="mb-[15px] border-b-2 border-bum-gray-350 pb-[5px] flex gap-[5px]">
             <Button
@@ -104,8 +137,9 @@ export const ManagementPage: React.FC = () => {
                 variant="primary"
                 size="md"
                 onClick={actions.openCreateModal}
-              >새로 만들기
-                </ActionButton>
+              >
+                새로 만들기
+              </ActionButton>
             </div>
 
             {/* Alerts */}

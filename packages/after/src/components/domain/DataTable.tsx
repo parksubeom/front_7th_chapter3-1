@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 // ----------------------------------------------------------------------
 // 1. Interface Definition
 // ----------------------------------------------------------------------
-export interface Column<T = any> {
+export interface Column<T> {
   key: string;
   header: string;
   width?: string;
@@ -38,6 +38,7 @@ interface DataTableProps<T> {
 // ----------------------------------------------------------------------
 // 2. Component Implementation
 // ----------------------------------------------------------------------
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function DataTable<T extends Record<string, any>>({
   columns,
   data = [],
@@ -117,10 +118,10 @@ export function DataTable<T extends Record<string, any>>({
     <div className={cn("space-y-4", className)}>
       {/* Search Bar */}
       {searchable && (
-        <div className="flex w-full max-w-sm items-center space-x-2">
+        <div className="flex w-full max-w-sm items-center space-x-2 ">
           <Input
             type="text"
-            placeholder="검색..."
+            placeholder="검색"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="h-9 w-64"
@@ -164,7 +165,9 @@ export function DataTable<T extends Record<string, any>>({
                 <TableRow
                   key={rowIndex}
                   onClick={() => onRowClick?.(row)}
-                  className={cn(onRowClick && "cursor-pointer hover:bg-muted/50")}
+                  className={cn(
+                    onRowClick && "cursor-pointer hover:bg-muted/50"
+                  )}
                 >
                   {columns.map((col) => (
                     <TableCell key={`${rowIndex}-${col.key}`}>
