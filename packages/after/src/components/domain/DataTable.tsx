@@ -118,13 +118,14 @@ export function DataTable<T extends Record<string, any>>({
     <div className={cn("space-y-4", className)}>
       {/* Search Bar */}
       {searchable && (
-        <div className="flex w-full max-w-sm items-center space-x-2 ">
+        <div className="flex w-full max-w-sm items-center space-x-2">
           <Input
             type="text"
             placeholder="검색"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="h-9 w-64"
+            aria-label="게시판 검색"
           />
         </div>
       )}
