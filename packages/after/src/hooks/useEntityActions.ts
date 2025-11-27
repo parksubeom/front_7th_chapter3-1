@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { userService } from "@/services/userService";
 import { postService } from "@/services/postService";
-import type { EntityType, Entity } from "./useEntityData";
+import type { EntityType } from "./useEntityData";
 
 interface UseEntityActionsProps {
   entityType: EntityType;

@@ -35,7 +35,7 @@ export const ManagementStats: React.FC<ManagementStatsProps> = ({ entityType, da
   })();
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-[10px] mb-[15px]">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-4 mb-[15px]">
       {statsList.map((stat, idx) => (
         <Card key={idx} variant="stats" color={stat.color as any}>
           <CardStatsLabel>{stat.label}</CardStatsLabel>

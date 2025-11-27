@@ -61,7 +61,7 @@ function CardStatsLabel({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("text-[12px] text-bum-gray-600 mb-[4px]", className)}
+      className={cn("text-[12px] text-bum-gray-600 mb-1", className)}
       {...props}
     />
   );

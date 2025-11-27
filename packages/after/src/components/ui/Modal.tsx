@@ -8,7 +8,6 @@ import {
   DialogDescription,
 } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button";
-import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ModalProps {
@@ -71,7 +70,7 @@ export const Modal: React.FC<ModalProps> = ({
         )}
       >
         {/* ✅ [Header] 항상 렌더링 */}
-        <DialogHeader className="px-6 py-4 border-b border-[rgba(0,0,0,0.12)] flex-shrink-0 flex flex-row items-center justify-between space-y-0">
+        <DialogHeader className="px-6 py-4 border-b border-[rgba(0,0,0,0.12)] shrink-0 flex flex-row items-center justify-between space-y-0">
           <DialogTitle className="text-[1.25rem] font-medium leading-none text-[rgba(0,0,0,0.87)]">
             {title}
           </DialogTitle>
@@ -87,7 +86,7 @@ export const Modal: React.FC<ModalProps> = ({
         </div>
 
         {/* ✅ [Footer] 항상 렌더링 */}
-        <DialogFooter className="px-6 py-4 border-t border-[rgba(0,0,0,0.12)] sm:justify-end gap-2 flex-shrink-0 bg-white">
+        <DialogFooter className="px-6 py-4 border-t border-[rgba(0,0,0,0.12)] sm:justify-end gap-2 shrink-0 bg-white">
           {footerContent ? (
             footerContent
           ) : (
