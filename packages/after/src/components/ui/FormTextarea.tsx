@@ -1,6 +1,6 @@
 import React from "react";
 import { Textarea } from "@/components/ui/TextArea";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/components/ui/Label";
 import { cn } from "@/lib/utils";
 
 // ✅ [Fix] onChange 타입 재정의
